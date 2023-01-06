@@ -3,11 +3,15 @@ package main
 import (
 	todo "github.com/evgeniy-dammer/todo-rest-api"
 	"github.com/evgeniy-dammer/todo-rest-api/pkg/handler"
+	"github.com/evgeniy-dammer/todo-rest-api/pkg/repository"
+	"github.com/evgeniy-dammer/todo-rest-api/pkg/service"
 	"log"
 )
 
 func main() {
-	handlers := new(handler.Handler)
+	repos := repository.NewRepository()
+	services := service.NewService(repos)
+	handlers := handler.NewHandler(services)
 
 	srv := new(todo.Server)
 

@@ -1,9 +1,18 @@
 package handler
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/evgeniy-dammer/todo-rest-api/pkg/service"
+	"github.com/gin-gonic/gin"
+)
 
 // Handler
 type Handler struct {
+	services *service.Service
+}
+
+// NewHandler constructor for Handler
+func NewHandler(services *service.Service) *Handler {
+	return &Handler{services: services}
 }
 
 // InitRoutes crete routes
