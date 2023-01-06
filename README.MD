@@ -1,4 +1,4 @@
-# A simple todo app REST API
+# A simple REST API for Todo application
 
 This application is based on the video course by Maxim Zhashkevych 
 
