@@ -60,6 +60,35 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "CreateList",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzMxMTMzOTIsImlhdCI6MTY3MzA3MDE5MiwidXNlcl9pZCI6Mn0.smoF9L4bud5DbLtJYx5sxS3IhzyxjhwMhgSOV8qlfzI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/lists",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"lists"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

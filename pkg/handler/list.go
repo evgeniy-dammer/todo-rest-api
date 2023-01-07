@@ -1,10 +1,15 @@
 package handler
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"net/http"
+)
 
 // createList
 func (h *Handler) createList(c *gin.Context) {
-
+	// just for authorization testing
+	id, _ := c.Get(userCtx)
+	c.JSON(http.StatusOK, map[string]interface{}{"id": id})
 }
 
 // getAllLists
