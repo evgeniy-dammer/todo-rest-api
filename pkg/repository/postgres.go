@@ -5,7 +5,15 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
-// DbConfig
+const (
+	userTable     = "users"
+	listTable     = "lists"
+	itemTable     = "items"
+	userListTable = "users_lists"
+	listItemTable = "lists_items"
+)
+
+// DbConfig is a database config
 type DbConfig struct {
 	Host     string
 	Port     string
@@ -15,7 +23,7 @@ type DbConfig struct {
 	SSLMode  string
 }
 
-// NewPostgresDB
+// NewPostgresDB create connection to database
 func NewPostgresDB(cfg DbConfig) (*sqlx.DB, error) {
 	db, err := sqlx.Open(
 		"postgres",
@@ -29,6 +37,7 @@ func NewPostgresDB(cfg DbConfig) (*sqlx.DB, error) {
 		return nil, err
 	}
 
+	// verify connection
 	err = db.Ping()
 
 	if err != nil {

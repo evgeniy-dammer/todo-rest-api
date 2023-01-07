@@ -2,3 +2,6 @@ README.MD
 .gitignore
 .git
 Makefile
+.env.example
+docker-compose.yml
+schema

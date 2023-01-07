@@ -7,18 +7,20 @@ import (
 	"github.com/evgeniy-dammer/todo-rest-api/pkg/service"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
-	"log"
 	"os"
 )
 
 func main() {
+	logrus.SetFormatter(new(logrus.JSONFormatter))
+
 	if err := initConfig(); err != nil {
-		log.Fatalf("error initializing config: %s", err.Error())
+		logrus.Fatalf("error initializing config: %s", err.Error())
 	}
 
 	if err := godotenv.Load(); err != nil {
-		log.Fatalf("error loading env variables: %s", err.Error())
+		logrus.Fatalf("error loading env variables: %s", err.Error())
 	}
 
 	db, err := repository.NewPostgresDB(
@@ -33,7 +35,7 @@ func main() {
 	)
 
 	if err != nil {
-		log.Fatalf("failed to initializer database: %s", err)
+		logrus.Fatalf("failed to initializer database: %s", err)
 	}
 
 	repos := repository.NewRepository(db)
@@ -43,10 +45,11 @@ func main() {
 	srv := new(todo.Server)
 
 	if err = srv.Run(viper.GetString("port"), handlers.InitRoutes()); err != nil {
-		log.Fatalf("error occured while running http server: %s", err.Error())
+		logrus.Fatalf("error occured while running http server: %s", err.Error())
 	}
 }
 
+// initConfig initializes configuration
 func initConfig() error {
 	viper.AddConfigPath("configs")
 	viper.SetConfigName("config")
