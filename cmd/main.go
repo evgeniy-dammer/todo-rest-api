@@ -13,16 +13,20 @@ import (
 )
 
 func main() {
+	// set log format as JSON
 	logrus.SetFormatter(new(logrus.JSONFormatter))
 
+	// initializing config
 	if err := initConfig(); err != nil {
 		logrus.Fatalf("error initializing config: %s", err.Error())
 	}
 
+	// loading env variables
 	if err := godotenv.Load(); err != nil {
 		logrus.Fatalf("error loading env variables: %s", err.Error())
 	}
 
+	// establishing database connection
 	db, err := repository.NewPostgresDB(
 		repository.DbConfig{
 			Host:     viper.GetString("db.host"),
@@ -35,15 +39,18 @@ func main() {
 	)
 
 	if err != nil {
-		logrus.Fatalf("failed to initializer database: %s", err)
+		logrus.Fatalf("failed to initialize database: %s", err)
 	}
 
+	// dependency injections
 	repos := repository.NewRepository(db)
 	services := service.NewService(repos)
 	handlers := handler.NewHandler(services)
 
+	// create new server
 	srv := new(todo.Server)
 
+	// run server
 	if err = srv.Run(viper.GetString("port"), handlers.InitRoutes()); err != nil {
 		logrus.Fatalf("error occured while running http server: %s", err.Error())
 	}

@@ -5,16 +5,20 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
+// Authorization interface
 type Authorization interface {
 	CreateUser(user todo.User) (int, error)
 }
 
+// TodoList interface
 type TodoList interface {
 }
 
+// TodoItem interface
 type TodoItem interface {
 }
 
+// Repository
 type Repository struct {
 	Authorization
 	TodoList

@@ -5,16 +5,20 @@ import (
 	"github.com/evgeniy-dammer/todo-rest-api/pkg/repository"
 )
 
+// Authorization interface
 type Authorization interface {
 	CreateUser(user todo.User) (int, error)
 }
 
+// TodoList interface
 type TodoList interface {
 }
 
+// TodoItem interface
 type TodoItem interface {
 }
 
+// Service
 type Service struct {
 	Authorization
 	TodoList

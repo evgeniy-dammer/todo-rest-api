@@ -5,6 +5,7 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
+// database table names
 const (
 	userTable     = "users"
 	listTable     = "lists"
