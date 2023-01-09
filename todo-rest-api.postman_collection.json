@@ -69,12 +69,50 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzMxMTMzOTIsImlhdCI6MTY3MzA3MDE5MiwidXNlcl9pZCI6Mn0.smoF9L4bud5DbLtJYx5sxS3IhzyxjhwMhgSOV8qlfzI",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzMyODcyMTEsImlhdCI6MTY3MzI0NDAxMSwidXNlcl9pZCI6MX0.pUAOyy_IKLfwQchunrL9QnhBCmeiztEudRUNvrhBqns",
 							"type": "string"
 						}
 					]
 				},
 				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"List1\",\n    \"description\": \"Description1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/lists",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"lists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllLists",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzMyODg3OTYsImlhdCI6MTY3MzI0NTU5NiwidXNlcl9pZCI6MX0.gwQoUUqrZuZA9TxQ5JKF82u8x8HbTIRCjqDnoOz5zCQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
 				"header": [],
 				"url": {
 					"raw": "localhost:8000/api/lists",
@@ -87,6 +125,14 @@
 						"lists"
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetListById",
+			"request": {
+				"method": "GET",
+				"header": []
 			},
 			"response": []
 		}
