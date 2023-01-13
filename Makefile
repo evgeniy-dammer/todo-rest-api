@@ -7,7 +7,7 @@ build:
 	go build -o todo-rest-api cmd/main.go
 
 rundb:
-	docker run -d --name todo-db -e POSTGRES_PASSWORD=${DB_PASSWORD} -p 5432:5432 --rm postgres:9.4
+	docker run -d --name todo-db -e POSTGRES_PASSWORD=${DB_PASSWORD} --net=host --rm postgres:9.4
 
 stopdb:
 	docker stop todo-db
@@ -20,3 +20,18 @@ migrup:
 
 migrdown:
 	migrate -path ./schema -database 'postgres://postgres:${DB_PASSWORD}@localhost:5432/postgres?sslmode=disable' down
+
+image: rmimage
+	sudo docker build -t todo-rest-api .
+
+rmimage:
+	docker image rm -f todo-rest-api
+
+cont:
+	docker run -dit --rm --net=host --name todo-rest-api todo-rest-api
+
+stopcont:
+	docker stop todo-rest-api
+
+prune:
+	docker image prune

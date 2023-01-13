@@ -5,3 +5,4 @@ Makefile
 .env.example
 docker-compose.yml
 schema
+todo-rest-api.postman_collection.json

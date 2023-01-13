@@ -1,0 +1,39 @@
+version: "3"
+services:
+  todo-rest-api:
+    container_name: todo-rest-api
+    build: .
+    network_mode: host
+    restart: always
+    command: ./todo-rest-api
+    depends_on:
+      - todo-db
+      - todo-migrate
+
+  todo-db:
+    container_name: todo-db
+    image: postgres:9.4
+    network_mode: host
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - todo-database:/var/lib/postgresql/data
+
+  todo-migrate:
+    container_name: todo-migrate
+    image: migrate/migrate:4
+    network_mode: host
+    env_file:
+      - .env
+    volumes:
+      - ./schema:/schema
+    command: ["-path", "./schema", "-database",  'postgres://postgres:${DB_PASSWORD}@0.0.0.0:5432/postgres?sslmode=disable', "up"]
+    depends_on:
+      - todo-db
+
+volumes:
+  todo-database:
+    external: true

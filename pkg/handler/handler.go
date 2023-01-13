@@ -17,6 +17,7 @@ func NewHandler(services *service.Service) *Handler {
 
 // InitRoutes crete routes
 func (h *Handler) InitRoutes() *gin.Engine {
+	gin.SetMode(gin.ReleaseMode)
 	router := gin.New()
 
 	auth := router.Group("/auth")
